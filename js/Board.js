@@ -56,11 +56,11 @@ Board.prototype.judgeFinished = function() {
 }
 
 Board.prototype.onRightRotate = function() {
-  this.fallingBlock.rightRotate();
+  this.fallingBlock.rotateRight();
 }
 
 Board.prototype.onLeftRotate = function() {
-  this.fallingBlock.leftRotate();
+  this.fallingBlock.rotateLeft();
 }
 
 Board.prototype.onRightMove = function() {
@@ -70,7 +70,7 @@ Board.prototype.onRightMove = function() {
 }
 
 Board.prototype.onLeftMove = function() {
-  if(this.fallingBlockPos[1] > 1) {
+  if(this.fallingBlockPos[1] > 0) {
     this.fallingBlockPos[1] -= 1;
   }
 }

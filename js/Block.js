@@ -1,24 +1,25 @@
 var Block = function(placementArray = []) {
   this.placement = placementArray;
   this.floors = [];
-
-  this.calcFloors();
+  this.width = this.calcFloors();
 }
 
 Block.prototype.calcFloors = function() {
+  var tmp = [];
   var newFloors = [];
-  var n = 0;
 
-  for(var i = this.placement.length - 1; i >= 0; --i) {
-    for(var j = n; j < this.placement[i].length; ++j) {
-      if(this.placement[i][j] != " ") {
-        newFloors.push([i, j]);
-        ++n;
-      }
+  for(var i = 0; i < this.placement.length; ++i) {
+    for(var j = 0; j < this.placement[i].length; ++j) {
+      tmp[j] = (this.placement[i][j] != " ") ? i : tmp[j];
     }
   }
 
+  for(var i = 0; i < tmp.length; ++i) {
+    newFloors.push([tmp[i], i]);
+  }
   this.floors = newFloors;
+
+  return newFloors.length;
 }
 
 Block.prototype.rotateRight = function() {
@@ -34,7 +35,7 @@ Block.prototype.rotateRight = function() {
   }
 
   this.placement = newPlacement;
-  this.calcFloors();
+  this.width = this.calcFloors();
 }
 
 Block.prototype.rotateLeft = function() {
@@ -50,7 +51,7 @@ Block.prototype.rotateLeft = function() {
   }
 
   this.placement = newPlacement;
-  this.calcFloors();
+  this.width = this.calcFloors();
 }
 
 Block.prototype.getPlacement = function() {
@@ -59,6 +60,10 @@ Block.prototype.getPlacement = function() {
 
 Block.prototype.getFloors = function() {
   return this.floors;
+}
+
+Block.prototype.getWidth = function() {
+  return this.width;
 }
 
 Block.prototype.toString = function(paddingLeft = 0, lineLength = 0) {

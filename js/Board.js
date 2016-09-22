@@ -46,12 +46,23 @@ Board.prototype.generateNewBlock = function() {
 
 Board.prototype.onUpdate = function() {
   if(!this.fallBlock()) {
+    this.putBlock();
     this.generateNewBlock();
   }
-  setTimeout(() => { this.onUpdate() }, 1000);
+  setTimeout(() => { this.onUpdate() }, 100);
 }
 
 Board.prototype.putBlock = function() {
+  var block = this.fallingBlock.getPlacement();
+  var pos = this.fallingBlockPos;
+
+  for(var i = 0; i < block.length; ++i) {
+    for(var j = 0; j < block[i].length; ++j) {
+      if(block[i][j] != " ") {
+        this.status[pos[0] + i][pos[1] + j] = block[i][j];
+      }
+    }
+  }
 }
 
 Board.prototype.fallBlock = function() {
@@ -111,7 +122,7 @@ Board.prototype.toString = function() {
 
   for(var i = 0; i < this.status.length; ++i) {
     for(var j = 0; j < this.status[i].length; ++j) {
-      if(i * 10 + j >= margin && i * 10 + j < margin + tmp.length) {
+      if(i * 10 + j >= margin && i * 10 + j < margin + tmp.length && tmp[i * 10 + j - margin] != " ") {
         statusChain[i * 10 + j] = tmp[i * 10 + j - margin];
       } else {
         statusChain[i * 10 + j] = this.status[i][j];

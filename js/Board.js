@@ -45,14 +45,43 @@ Board.prototype.generateNewBlock = function() {
 }
 
 Board.prototype.onUpdate = function() {
-  console.log("test");
+  if(!this.fallBlock()) {
+    this.generateNewBlock();
+  }
   setTimeout(() => { this.onUpdate() }, 1000);
 }
 
+Board.prototype.putBlock = function() {
+}
+
+Board.prototype.fallBlock = function() {
+  if(this.canFallBlock()) {
+    this.fallingBlockPos[0] += 1;
+    this.deleteLine();
+    return true;
+  } else {
+    return false;
+  }
+}
+
 Board.prototype.canFallBlock = function() {
+  var floors = this.fallingBlock.getFloors();
+
+  for(var i = 0; i < floors.length; ++i) {
+    var nextFloorY = this.fallingBlockPos[0] + floors[i][0] + 1;
+    var nextFloorX = this.fallingBlockPos[1] + floors[i][1] + 1;
+
+    if(this.status[nextFloorY] == undefined || this.status[nextFloorY][nextFloorX] != " ") {
+      return false;
+    }
+  }
+  return true;
 }
 
 Board.prototype.judgeFinished = function() {
+}
+
+Board.prototype.deleteLine = function() {
 }
 
 Board.prototype.onRightRotate = function() {

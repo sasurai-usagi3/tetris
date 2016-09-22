@@ -53,6 +53,10 @@ Block.prototype.rotateLeft = function() {
   this.calcFloors();
 }
 
+Block.prototype.getPlacement = function() {
+  return this.placement;
+}
+
 Block.prototype.getFloors = function() {
   return this.floors;
 }

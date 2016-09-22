@@ -80,7 +80,7 @@ Board.prototype.canFallBlock = function() {
 
   for(var i = 0; i < floors.length; ++i) {
     var nextFloorY = this.fallingBlockPos[0] + floors[i][0] + 1;
-    var nextFloorX = this.fallingBlockPos[1] + floors[i][1] + 1;
+    var nextFloorX = this.fallingBlockPos[1] + floors[i][1];
 
     if(this.status[nextFloorY] == undefined || this.status[nextFloorY][nextFloorX] != " ") {
       return false;

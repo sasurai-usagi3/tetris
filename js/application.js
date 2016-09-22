@@ -20,6 +20,19 @@ window.onload = function() {
   document.body.appendChild(table);
 
   board.onStart();
+  document.onkeydown = function(e) {
+    if(e.keyCode == 37) {
+      board.onLeftMove();
+    } else if(e.keyCode == 38) {
+      board.onLeftRotate();
+    } else if(e.keyCode == 39) {
+      board.onRightMove();
+    } else if(e.keyCode == 40) {
+      board.onRightRotate();
+    }
+    e.preventDefault();
+  }
+
   setInterval(function() {
     var tmp = board.toString();
 

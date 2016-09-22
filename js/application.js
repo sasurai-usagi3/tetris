@@ -7,9 +7,10 @@ window.onload = function() {
 
   for(var i = 0; i < 21; ++i) {
     var tr = document.createElement("tr");
-    cell[i] = [];
+
     for(var j = 0; j < 10; ++j) { 
       var td = document.createElement("td");
+      cell.push(td);
       tr.appendChild(td);
     }
     tbody.appendChild(tr);
@@ -19,4 +20,35 @@ window.onload = function() {
   document.body.appendChild(table);
 
   board.onStart();
+  setInterval(function() {
+    var tmp = board.toString();
+
+    for(var i = 0; i < tmp.length; ++i) {
+      switch(tmp[i]) {
+        case "A":
+          cell[i].style.backgroundColor = "#ff0000";
+          break;
+        case "B":
+          cell[i].style.backgroundColor = "#00ff00";
+          break;
+        case "C":
+          cell[i].style.backgroundColor = "#0000ff";
+          break;
+        case "D":
+          cell[i].style.backgroundColor = "#ffff00";
+          break;
+        case "E":
+          cell[i].style.backgroundColor = "#ff00ff";
+          break;
+        case "F":
+          cell[i].style.backgroundColor = "#00ffff";
+          break;
+        case "G":
+          cell[i].style.backgroundColor = "#000000";
+          break;
+        default:
+          cell[i].style.backgroundColor = "transparent";
+      }
+    }
+  }, 10);
 }

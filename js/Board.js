@@ -49,7 +49,7 @@ Board.prototype.onUpdate = function() {
     this.putBlock();
     this.generateNewBlock();
   }
-  setTimeout(() => { this.onUpdate() }, 100);
+  setTimeout(() => { this.onUpdate() }, 500);
 }
 
 Board.prototype.putBlock = function() {
@@ -104,7 +104,7 @@ Board.prototype.onLeftRotate = function() {
 }
 
 Board.prototype.onRightMove = function() {
-  if(this.fallingBlockPos[1] < 9) {
+  if(this.fallingBlockPos[1] < 10 - this.fallingBlock.getWidth()) {
     this.fallingBlockPos[1] += 1;
   }
 }

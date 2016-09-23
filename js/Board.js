@@ -115,12 +115,18 @@ Board.prototype.canMove = function() {
 Board.prototype.onRightRotate = function() {
   if(this.fallingBlock.getHeight() <= 10 - this.fallingBlockPos[1]) {
     this.fallingBlock.rotateRight();
+    if(!this.canMove()) {
+      this.fallingBlock.rotateLeft();
+    }
   }
 }
 
 Board.prototype.onLeftRotate = function() {
   if(this.fallingBlock.getHeight() <= 10 - this.fallingBlockPos[1]) {
     this.fallingBlock.rotateLeft();
+    if(!this.canMove()) {
+      this.fallingBlock.rotateRight();
+    }
   }
 }
 
@@ -141,7 +147,6 @@ Board.prototype.onLeftMove = function() {
     }
   }
 }
-
 
 Board.prototype.toString = function() {
   var statusChain = [];

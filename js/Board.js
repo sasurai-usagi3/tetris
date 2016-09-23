@@ -95,25 +95,53 @@ Board.prototype.judgeFinished = function() {
 Board.prototype.deleteLine = function() {
 }
 
+Board.prototype.canMove = function() {
+  var block = this.fallingBlock.getPlacement();
+  for(var i = 0; i < block.length; ++i) {
+    for(var j = 0; j < block[i].length; ++j) {
+      var pos = this.fallingBlockPos;
+      var y = pos[0] + i, x = pos[1] + j;
+
+      if(block[i][j] != " " && this.status[y][x] != " ") {
+        console.log(block[i][j]);
+        console.log(this.status[y][x]);
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
 Board.prototype.onRightRotate = function() {
-  this.fallingBlock.rotateRight();
+  if(this.fallingBlock.getHeight() <= 10 - this.fallingBlockPos[1]) {
+    this.fallingBlock.rotateRight();
+  }
 }
 
 Board.prototype.onLeftRotate = function() {
-  this.fallingBlock.rotateLeft();
+  if(this.fallingBlock.getHeight() <= 10 - this.fallingBlockPos[1]) {
+    this.fallingBlock.rotateLeft();
+  }
 }
 
 Board.prototype.onRightMove = function() {
   if(this.fallingBlockPos[1] < 10 - this.fallingBlock.getWidth()) {
     this.fallingBlockPos[1] += 1;
+    if(!this.canMove()) {
+      this.fallingBlockPos[1] -= 1;
+    }
   }
 }
 
 Board.prototype.onLeftMove = function() {
   if(this.fallingBlockPos[1] > 0) {
     this.fallingBlockPos[1] -= 1;
+    if(!this.canMove()) {
+      this.fallingBlockPos[1] += 1;
+    }
   }
 }
+
 
 Board.prototype.toString = function() {
   var statusChain = [];

@@ -2,6 +2,7 @@ var Block = function(placementArray = []) {
   this.placement = placementArray;
   this.floors = [];
   this.width = this.calcFloors();
+  this.height = this.placement.length;
 }
 
 Block.prototype.calcFloors = function() {
@@ -36,6 +37,7 @@ Block.prototype.rotateRight = function() {
 
   this.placement = newPlacement;
   this.width = this.calcFloors();
+  this.height = this.placement.length;
 }
 
 Block.prototype.rotateLeft = function() {
@@ -52,6 +54,7 @@ Block.prototype.rotateLeft = function() {
 
   this.placement = newPlacement;
   this.width = this.calcFloors();
+  this.height = this.placement.length;
 }
 
 Block.prototype.getPlacement = function() {
@@ -60,6 +63,10 @@ Block.prototype.getPlacement = function() {
 
 Block.prototype.getFloors = function() {
   return this.floors;
+}
+
+Block.prototype.getHeight = function() {
+  return this.height;
 }
 
 Block.prototype.getWidth = function() {

@@ -49,6 +49,10 @@ Board.prototype.onUpdate = function() {
     this.putBlock();
     this.deleteLine();
     this.generateNewBlock();
+    if(!this.canMove()) {
+      console.log("ゲームオーバー");
+      return;
+    }
   }
   setTimeout(() => { this.onUpdate() }, 150);
 }
@@ -88,9 +92,6 @@ Board.prototype.canFallBlock = function() {
     }
   }
   return true;
-}
-
-Board.prototype.judgeFinished = function() {
 }
 
 Board.prototype.deleteLine = function() {

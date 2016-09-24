@@ -23,14 +23,17 @@ window.onload = function() {
   document.onkeydown = function(e) {
     if(e.keyCode == 37) {
       board.onLeftMove();
+      e.preventDefault();
     } else if(e.keyCode == 38) {
       board.onLeftRotate();
+      e.preventDefault();
     } else if(e.keyCode == 39) {
       board.onRightMove();
+      e.preventDefault();
     } else if(e.keyCode == 40) {
       board.onRightRotate();
+      e.preventDefault();
     }
-    e.preventDefault();
   }
 
   setInterval(function() {

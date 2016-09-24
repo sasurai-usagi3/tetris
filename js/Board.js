@@ -7,7 +7,7 @@ var Board = function() {
     }
   }
   this.fallingBlock = null;
-  this.fallingBlockPos = [0, 0];
+  this.fallingBlockPos = [0, 5];
 }
 
 Board.prototype.onStart = function() {
@@ -41,7 +41,7 @@ Board.prototype.generateNewBlock = function() {
       this.fallingBlock = new Block7();
       break;
   }
-  this.fallingBlockPos = [0, 0];
+  this.fallingBlockPos = [0, 5];
 }
 
 Board.prototype.onUpdate = function() {

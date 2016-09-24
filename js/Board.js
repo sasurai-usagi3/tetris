@@ -118,8 +118,6 @@ Board.prototype.canMove = function() {
       var y = pos[0] + i, x = pos[1] + j;
 
       if(block[i][j] != " " && this.status[y][x] != " ") {
-        console.log(block[i][j]);
-        console.log(this.status[y][x]);
         return false;
       }
     }

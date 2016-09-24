@@ -47,9 +47,10 @@ Board.prototype.generateNewBlock = function() {
 Board.prototype.onUpdate = function() {
   if(!this.fallBlock()) {
     this.putBlock();
+    this.deleteLine();
     this.generateNewBlock();
   }
-  setTimeout(() => { this.onUpdate() }, 500);
+  setTimeout(() => { this.onUpdate() }, 150);
 }
 
 Board.prototype.putBlock = function() {
@@ -93,6 +94,20 @@ Board.prototype.judgeFinished = function() {
 }
 
 Board.prototype.deleteLine = function() {
+  var flag = true;
+  for(var i = 0; i < this.status.length; ++i) {
+    flag = true;
+    for(var j = 0; j < this.status[i].length; ++j) {
+      if(this.status[i][j] ==  " ") {
+        flag = false;
+        break;
+      }
+    }
+    if(flag) {
+      this.status.splice(i, 1);
+      this.status.unshift("          ".split(""));
+    }
+  }
 }
 
 Board.prototype.canMove = function() {

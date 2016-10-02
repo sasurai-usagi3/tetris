@@ -8,13 +8,8 @@ class Block {
   rotateClockwise() {
     let newPlacement = [];
 
-    for(let i = 0; i < this.placement.length; ++i) {
-      for(let j = 0; j < this.placement[i].length; ++j) {
-        if(newPlacement[j] == undefined) {
-          newPlacement[j] = [];
-        }
-        newPlacement[j][this.placement.length - i - 1] = this.placement[i][j];
-      }
+    for(let i = 0; i < this.width; ++i) {
+      newPlacement[i] = this.placement.map(line => line[i] || " ").reverse();
     }
 
     this.placement = newPlacement;
@@ -24,17 +19,13 @@ class Block {
 
   rotateCounterclockwise() {
     let newPlacement = [];
+    let test = [];
 
-    for(let i = 0; i < this.placement.length; ++i) {
-      for(let j = 0; j < this.placement[i].length; ++j) {
-        if(newPlacement[this.placement[i].length - j - 1] == undefined) {
-          newPlacement[this.placement[i].length - j - 1] = [];
-        }
-        newPlacement[this.placement[i].length - j - 1][i] = this.placement[i][j];
-      }
+    for(let i = 0; i < this.width; ++i) {
+      newPlacement[i] = this.placement.map(line => line[i] || " ");
     }
 
-    this.placement = newPlacement;
+    this.placement = newPlacement.reverse();
     this.width = Math.max.apply(null, this.placement.map(line => line.length));
     this.height = this.placement.length;
   }

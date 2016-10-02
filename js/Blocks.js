@@ -1,66 +1,66 @@
 class Block1 extends Block {
   constructor() {
-    super([
+    super(
       "A", 
       "A",
       "A",
       "A"
-    ]);
+    );
   }
 }
 
 class Block2 extends Block {
   constructor() {
-    super([
+    super(
       "BB", 
       " B",
       " B"
-    ]);
+    );
   }
 }
 
 class Block3 extends Block {
   constructor() {
-    super([
+    super(
       "CC", 
       "C ",
       "C "
-    ]);
+    );
   }
 }
 
 class Block4 extends Block {
   constructor() {
-    super([
+    super(
       "DD ",
       " DD"
-    ]);
+    );
   }
 }
 
 class Block5 extends Block {
   constructor() {
-    super([
+    super(
       " EE",
       "EE "
-    ]);
+    );
   }
 }
 
 class Block6 extends Block {
   constructor() {
-    super([
+    super(
       " F ",
       "FFF"
-    ]);
+    );
   }
 }
 
 class Block7 extends Block {
   constructor() {
-    super([
+    super(
       "GG",
       "GG"
-    ]);
+    );
   }
 }

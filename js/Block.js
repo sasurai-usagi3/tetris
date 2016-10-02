@@ -1,27 +1,8 @@
 class Block {
-  constructor(placementArray = []) {
-    this.placement = placementArray;
-    this.floors = [];
-    this.width = this.calcFloors();
+  constructor(...placementArray) {
+    this.placement = placementArray.map(line => line.split(""));
+    this.width = Math.max.apply(null, this.placement.map(line => line.length));
     this.height = this.placement.length;
-  }
-
-  calcFloors() {
-    let tmp = [];
-    let newFloors = [];
-
-    for(let i = 0; i < this.placement.length; ++i) {
-      for(let j = 0; j < this.placement[i].length; ++j) {
-        tmp[j] = (this.placement[i][j] != " ") ? i : tmp[j];
-      }
-    }
-
-    for(let i = 0; i < tmp.length; ++i) {
-      newFloors.push([tmp[i], i]);
-    }
-    this.floors = newFloors;
-
-    return newFloors.length;
   }
 
   rotateClockwise() {
@@ -36,8 +17,8 @@ class Block {
       }
     }
 
-    this.placement = newPlacement.map(line => line.join(""));;
-    this.width = this.calcFloors();
+    this.placement = newPlacement;
+    this.width = Math.max.apply(null, this.placement.map(line => line.length));
     this.height = this.placement.length;
   } 
 
@@ -53,17 +34,13 @@ class Block {
       }
     }
 
-    this.placement = newPlacement.map(line => line.join(""));;
-    this.width = this.calcFloors();
+    this.placement = newPlacement;
+    this.width = Math.max.apply(null, this.placement.map(line => line.length));
     this.height = this.placement.length;
   }
 
   getPlacement() {
     return this.placement;
-  }
-
-  getFloors() {
-    return this.floors;
   }
 
   getHeight() {
@@ -83,7 +60,7 @@ class Block {
         placementChain += " ";
         ++l;
       }
-      placementChain += this.placement[i];
+      placementChain += this.placement[i].join("");
       l += this.placement[i].length;
       for(; l < lineLength; ++l) {
         placementChain += " ";

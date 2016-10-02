@@ -1,15 +1,15 @@
 window.onload = function() {
-  var table = document.createElement("table");
-  var thead = document.createElement("thead");
-  var tbody = document.createElement("tbody");
-  var board = new Board();
-  var cell = [];
+  let table = document.createElement("table");
+  let thead = document.createElement("thead");
+  let tbody = document.createElement("tbody");
+  let board = new Board();
+  let cell = [];
 
-  for(var i = 0; i < 21; ++i) {
-    var tr = document.createElement("tr");
+  for(let i = 0; i < 21; ++i) {
+    let tr = document.createElement("tr");
 
-    for(var j = 0; j < 10; ++j) { 
-      var td = document.createElement("td");
+    for(let j = 0; j < 10; ++j) { 
+      let td = document.createElement("td");
       cell.push(td);
       tr.appendChild(td);
     }
@@ -37,9 +37,9 @@ window.onload = function() {
   }
 
   setInterval(function() {
-    var tmp = board.toString();
+    let tmp = board.toString();
 
-    for(var i = 0; i < tmp.length; ++i) {
+    for(let i = 0; i < tmp.length; ++i) {
       switch(tmp[i]) {
         case "A":
           cell[i].style.backgroundColor = "#ff0000";

@@ -7,16 +7,16 @@ class Block {
   }
 
   calcFloors() {
-    var tmp = [];
-    var newFloors = [];
+    let tmp = [];
+    let newFloors = [];
 
-    for(var i = 0; i < this.placement.length; ++i) {
-      for(var j = 0; j < this.placement[i].length; ++j) {
+    for(let i = 0; i < this.placement.length; ++i) {
+      for(let j = 0; j < this.placement[i].length; ++j) {
         tmp[j] = (this.placement[i][j] != " ") ? i : tmp[j];
       }
     }
 
-    for(var i = 0; i < tmp.length; ++i) {
+    for(let i = 0; i < tmp.length; ++i) {
       newFloors.push([tmp[i], i]);
     }
     this.floors = newFloors;
@@ -25,10 +25,10 @@ class Block {
   }
 
   rotateRight() {
-    var newPlacement = [];
+    let newPlacement = [];
 
-    for(var i = 0; i < this.placement.length; ++i) {
-      for(var j = 0; j < this.placement[i].length; ++j) {
+    for(let i = 0; i < this.placement.length; ++i) {
+      for(let j = 0; j < this.placement[i].length; ++j) {
         if(newPlacement[j] == undefined) {
           newPlacement[j] = [];
         }
@@ -42,10 +42,10 @@ class Block {
   } 
 
   rotateLeft() {
-    var newPlacement = [];
+    let newPlacement = [];
 
-    for(var i = 0; i < this.placement.length; ++i) {
-      for(var j = 0; j < this.placement[i].length; ++j) {
+    for(let i = 0; i < this.placement.length; ++i) {
+      for(let j = 0; j < this.placement[i].length; ++j) {
         if(newPlacement[this.placement[i].length - j - 1] == undefined) {
           newPlacement[this.placement[i].length - j - 1] = [];
         }
@@ -75,11 +75,11 @@ class Block {
   }
 
   toString(paddingLeft = 0, lineLength = 0) {
-    var placementChain = "";
-    var l = 0;
+    let placementChain = "";
+    let l = 0;
 
-    for(var i = 0; i < this.placement.length; ++i, l = 0) {
-      for(var j = 0; j < paddingLeft; ++j) {
+    for(let i = 0; i < this.placement.length; ++i, l = 0) {
+      for(let j = 0; j < paddingLeft; ++j) {
         placementChain += " ";
         ++l;
       }

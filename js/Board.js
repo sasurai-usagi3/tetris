@@ -1,9 +1,9 @@
 class Board {
   constructor() {
     this.status = [];
-    for(var i = 0; i < 21; ++i) {
+    for(let i = 0; i < 21; ++i) {
       this.status[i] = [];
-      for(var j = 0; j < 10; ++j) {
+      for(let j = 0; j < 10; ++j) {
         this.status[i][j] = " ";
       }
     }
@@ -17,7 +17,7 @@ class Board {
   }
 
   generateNewBlock() {
-    var r = Math.floor(Math.random() * 7);
+    let r = Math.floor(Math.random() * 7);
 
     switch(r) {
       case 0:
@@ -59,11 +59,11 @@ class Board {
   }
 
   putBlock() {
-    var block = this.fallingBlock.getPlacement();
-    var pos = this.fallingBlockPos;
+    let block = this.fallingBlock.getPlacement();
+    let pos = this.fallingBlockPos;
 
-    for(var i = 0; i < block.length; ++i) {
-      for(var j = 0; j < block[i].length; ++j) {
+    for(let i = 0; i < block.length; ++i) {
+      for(let j = 0; j < block[i].length; ++j) {
         if(block[i][j] != " ") {
           this.status[pos[0] + i][pos[1] + j] = block[i][j];
         }
@@ -82,11 +82,11 @@ class Board {
   }
 
   canFallBlock() {
-    var floors = this.fallingBlock.getFloors();
+    let floors = this.fallingBlock.getFloors();
 
-    for(var i = 0; i < floors.length; ++i) {
-      var nextFloorY = this.fallingBlockPos[0] + floors[i][0] + 1;
-      var nextFloorX = this.fallingBlockPos[1] + floors[i][1];
+    for(let i = 0; i < floors.length; ++i) {
+      let nextFloorY = this.fallingBlockPos[0] + floors[i][0] + 1;
+      let nextFloorX = this.fallingBlockPos[1] + floors[i][1];
 
       if(this.status[nextFloorY] == undefined || this.status[nextFloorY][nextFloorX] != " ") {
         return false;
@@ -96,8 +96,8 @@ class Board {
   }
 
   deleteLine() {
-    var flag = true;
-    for(var i = 0; i < this.status.length; ++i) {
+    let flag = true;
+    for(let i = 0; i < this.status.length; ++i) {
       flag = true;
       for(var j = 0; j < this.status[i].length; ++j) {
         if(this.status[i][j] ==  " ") {
@@ -113,9 +113,9 @@ class Board {
   }
 
   canMove() {
-    var block = this.fallingBlock.getPlacement();
-    for(var i = 0; i < block.length; ++i) {
-      for(var j = 0; j < block[i].length; ++j) {
+    let block = this.fallingBlock.getPlacement();
+    for(let i = 0; i < block.length; ++i) {
+      for(let j = 0; j < block[i].length; ++j) {
         var pos = this.fallingBlockPos;
         var y = pos[0] + i, x = pos[1] + j;
 
@@ -164,12 +164,12 @@ class Board {
   }
 
   toString() {
-    var statusChain = [];
-    var margin = this.fallingBlockPos[0] * 10;
-    var tmp = this.fallingBlock.toString(this.fallingBlockPos[1], 10);
+    let statusChain = [];
+    let margin = this.fallingBlockPos[0] * 10;
+    let tmp = this.fallingBlock.toString(this.fallingBlockPos[1], 10);
 
-    for(var i = 0; i < this.status.length; ++i) {
-      for(var j = 0; j < this.status[i].length; ++j) {
+    for(let i = 0; i < this.status.length; ++i) {
+      for(let j = 0; j < this.status[i].length; ++j) {
         if(i * 10 + j >= margin && i * 10 + j < margin + tmp.length && tmp[i * 10 + j - margin] != " ") {
           statusChain[i * 10 + j] = tmp[i * 10 + j - margin];
         } else {

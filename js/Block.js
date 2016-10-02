@@ -43,14 +43,6 @@ class Block {
     return this.placement;
   }
 
-  getHeight() {
-    return this.height;
-  }
-
-  getWidth() {
-    return this.width;
-  }
-
   toString(paddingLeft = 0, lineLength = 0) {
     let placementChain = "";
     let l = 0;

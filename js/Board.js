@@ -11,9 +11,9 @@ class Board {
     this.fallingBlockPos = [0, 5];
   }
 
-  onStart() {
+  start() {
     this.generateNewBlock();
-    this.onUpdate();
+    this.update();
   }
 
   generateNewBlock() {
@@ -45,7 +45,7 @@ class Board {
     this.fallingBlockPos = [0, 5];
   }
 
-  onUpdate() {
+  update() {
     if(!this.fallBlock()) {
       this.putBlock();
       this.deleteLine();
@@ -55,7 +55,7 @@ class Board {
         return;
       }
     }
-    setTimeout(() => { this.onUpdate() }, 150);
+    setTimeout(() => { this.update() }, 150);
   }
 
   putBlock() {
@@ -127,25 +127,25 @@ class Board {
     return true;
   }
 
-  onRightRotate() {
+  rotateBlockClockwise() {
     if(this.fallingBlock.getHeight() <= 10 - this.fallingBlockPos[1]) {
-      this.fallingBlock.rotateRight();
+      this.fallingBlock.rotateClockwise();
       if(!this.canMove()) {
-        this.fallingBlock.rotateLeft();
+        this.fallingBlock.rotateCounterclockwise();
       }
     }
   }
 
-  onLeftRotate() {
+  rotateBlockCounterclockwise() {
     if(this.fallingBlock.getHeight() <= 10 - this.fallingBlockPos[1]) {
-      this.fallingBlock.rotateLeft();
+      this.fallingBlock.rotateCounterclockwise();
       if(!this.canMove()) {
-        this.fallingBlock.rotateRight();
+        this.fallingBlock.rotateClockwise();
       }
     }
   }
 
-  onRightMove() {
+  moveBlockToRight() {
     if(this.fallingBlockPos[1] < 10 - this.fallingBlock.getWidth()) {
       this.fallingBlockPos[1] += 1;
       if(!this.canMove()) {
@@ -154,7 +154,7 @@ class Board {
     }
   }
 
-  onLeftMove() {
+  moveBlockToLeft() {
     if(this.fallingBlockPos[1] > 0) {
       this.fallingBlockPos[1] -= 1;
       if(!this.canMove()) {

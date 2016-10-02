@@ -24,7 +24,7 @@ class Block {
     return newFloors.length;
   }
 
-  rotateRight() {
+  rotateClockwise() {
     let newPlacement = [];
 
     for(let i = 0; i < this.placement.length; ++i) {
@@ -41,7 +41,7 @@ class Block {
     this.height = this.placement.length;
   } 
 
-  rotateLeft() {
+  rotateCounterclockwise() {
     let newPlacement = [];
 
     for(let i = 0; i < this.placement.length; ++i) {

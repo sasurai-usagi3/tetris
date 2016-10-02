@@ -3,14 +3,14 @@ window.onload = function() {
   let thead = document.createElement("thead");
   let tbody = document.createElement("tbody");
   let board = new Board();
-  let cell = [];
+  let cells = [];
 
   for(let i = 0; i < 21; ++i) {
     let tr = document.createElement("tr");
 
     for(let j = 0; j < 10; ++j) { 
       let td = document.createElement("td");
-      cell.push(td);
+      cells.push(td);
       tr.appendChild(td);
     }
     tbody.appendChild(tr);
@@ -19,19 +19,19 @@ window.onload = function() {
   table.appendChild(tbody);
   document.body.appendChild(table);
 
-  board.onStart();
+  board.start();
   document.onkeydown = function(e) {
     if(e.keyCode == 37) {
-      board.onLeftMove();
+      board.moveBlockToLeft();
       e.preventDefault();
     } else if(e.keyCode == 38) {
-      board.onLeftRotate();
+      board.rotateBlockClockwise();
       e.preventDefault();
     } else if(e.keyCode == 39) {
-      board.onRightMove();
+      board.moveBlockToRight();
       e.preventDefault();
     } else if(e.keyCode == 40) {
-      board.onRightRotate();
+      board.rotateBlockCounterclockwise();
       e.preventDefault();
     }
   }
@@ -42,28 +42,28 @@ window.onload = function() {
     for(let i = 0; i < tmp.length; ++i) {
       switch(tmp[i]) {
         case "A":
-          cell[i].style.backgroundColor = "#ff0000";
+          cells[i].style.backgroundColor = "#ff0000";
           break;
         case "B":
-          cell[i].style.backgroundColor = "#00ff00";
+          cells[i].style.backgroundColor = "#00ff00";
           break;
         case "C":
-          cell[i].style.backgroundColor = "#0000ff";
+          cells[i].style.backgroundColor = "#0000ff";
           break;
         case "D":
-          cell[i].style.backgroundColor = "#ffff00";
+          cells[i].style.backgroundColor = "#ffff00";
           break;
         case "E":
-          cell[i].style.backgroundColor = "#ff00ff";
+          cells[i].style.backgroundColor = "#ff00ff";
           break;
         case "F":
-          cell[i].style.backgroundColor = "#00ffff";
+          cells[i].style.backgroundColor = "#00ffff";
           break;
         case "G":
-          cell[i].style.backgroundColor = "#000000";
+          cells[i].style.backgroundColor = "#000000";
           break;
         default:
-          cell[i].style.backgroundColor = "transparent";
+          cells[i].style.backgroundColor = "transparent";
       }
     }
   }, 10);

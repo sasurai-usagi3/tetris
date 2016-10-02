@@ -90,16 +90,8 @@ class Board {
   }
 
   deleteLines() {
-    let flag = true;
     for(let i = 0; i < this.status.length; ++i) {
-      flag = true;
-      for(let j = 0; j < this.status[i].length; ++j) {
-        if(this.status[i][j] ==  " ") {
-          flag = false;
-          break;
-        }
-      }
-      if(flag) {
+      if(this.status[i].filter(line => line != " ").length == 10) {
         this.status.splice(i, 1);
         this.status.unshift("          ".split(""));
       }

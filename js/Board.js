@@ -113,7 +113,7 @@ class Board {
         let pos = this.fallingBlockPos;
         let y = pos[0] + i, x = pos[1] + j;
 
-        if(y > 20 || (block[i][j] != " " && this.status[y][x] != " ")) {
+        if(y < 0|| y > 20 || x < 0 || x > 9 || (block[i][j] != " " && this.status[y][x] != " ")) {
           return true;
         }
       }
@@ -122,38 +122,30 @@ class Board {
   }
 
   rotateBlockClockwiseIfPossible() {
-    if(this.fallingBlock.getHeight() <= 10 - this.fallingBlockPos[1]) {
-      this.fallingBlock.rotateClockwise();
-      if(this.ifOverwrapBlocks()) {
-        this.fallingBlock.rotateCounterclockwise();
-      }
+    this.fallingBlock.rotateClockwise();
+    if(this.ifOverwrapBlocks()) {
+      this.fallingBlock.rotateCounterclockwise();
     }
   }
 
-  rotateBlockCounterclockwiseIfPossible() {
-    if(this.fallingBlock.getHeight() <= 10 - this.fallingBlockPos[1]) {
-      this.fallingBlock.rotateCounterclockwise();
-      if(this.ifOverwrapBlocks()) {
-        this.fallingBlock.rotateClockwise();
-      }
+  rotateBlockCounterclockwiseIfPossible() { 
+    this.fallingBlock.rotateCounterclockwise();
+    if(this.ifOverwrapBlocks()) {
+      this.fallingBlock.rotateClockwise();
     }
   }
 
   moveBlockToRightIfPossible() {
-    if(this.fallingBlockPos[1] < 10 - this.fallingBlock.getWidth()) {
-      this.fallingBlockPos[1] += 1;
-      if(this.ifOverwrapBlocks()) {
-        this.fallingBlockPos[1] -= 1;
-      }
+    this.fallingBlockPos[1] += 1;
+    if(this.ifOverwrapBlocks()) {
+      this.fallingBlockPos[1] -= 1;
     }
   }
 
   moveBlockToLeftIfPossible() {
-    if(this.fallingBlockPos[1] > 0) {
-      this.fallingBlockPos[1] -= 1;
-      if(this.ifOverwrapBlocks()) {
-        this.fallingBlockPos[1] += 1;
-      }
+    this.fallingBlockPos[1] -= 1;
+    if(this.ifOverwrapBlocks()) {
+      this.fallingBlockPos[1] += 1;
     }
   }
 

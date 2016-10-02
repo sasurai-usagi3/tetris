@@ -1,4 +1,4 @@
-window.onload = function() {
+window.onload = () => {
   let table = document.createElement("table");
   let thead = document.createElement("thead");
   let tbody = document.createElement("tbody");
@@ -20,7 +20,7 @@ window.onload = function() {
   document.body.appendChild(table);
 
   board.start();
-  document.onkeydown = function(e) {
+  document.onkeydown = (e) => {
     if(e.keyCode == 37) {
       board.moveBlockToLeftIfPossible();
       e.preventDefault();
@@ -36,7 +36,7 @@ window.onload = function() {
     }
   }
 
-  setInterval(function() {
+  setInterval(() =>  {
     let tmp = board.toString();
 
     for(let i = 0; i < tmp.length; ++i) {

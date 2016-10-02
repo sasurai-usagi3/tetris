@@ -35,7 +35,7 @@ Block.prototype.rotateRight = function() {
     }
   }
 
-  this.placement = newPlacement;
+  this.placement = newPlacement.map(line => line.join(""));;
   this.width = this.calcFloors();
   this.height = this.placement.length;
 }
@@ -52,7 +52,7 @@ Block.prototype.rotateLeft = function() {
     }
   }
 
-  this.placement = newPlacement;
+  this.placement = newPlacement.map(line => line.join(""));;
   this.width = this.calcFloors();
   this.height = this.placement.length;
 }
@@ -82,7 +82,7 @@ Block.prototype.toString = function(paddingLeft = 0, lineLength = 0) {
       placementChain += " ";
       ++l;
     }
-    placementChain += this.placement[i].join("");
+    placementChain += this.placement[i];
     l += this.placement[i].length;
     for(; l < lineLength; ++l) {
       placementChain += " ";

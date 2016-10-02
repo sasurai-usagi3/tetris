@@ -113,7 +113,7 @@ class Board {
         let pos = this.fallingBlockPos;
         let y = pos[0] + i, x = pos[1] + j;
 
-        if(y < 0|| y > 20 || x < 0 || x > 9 || (block[i][j] != " " && this.status[y][x] != " ")) {
+        if(y < 0 || y > 20 || x < 0 || x > 9 || (block[i][j] != " " && this.status[y][x] != " ")) {
           return true;
         }
       }

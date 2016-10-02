@@ -22,16 +22,16 @@ window.onload = function() {
   board.start();
   document.onkeydown = function(e) {
     if(e.keyCode == 37) {
-      board.moveBlockToLeft();
+      board.moveBlockToLeftIfPossible();
       e.preventDefault();
     } else if(e.keyCode == 38) {
-      board.rotateBlockClockwise();
+      board.rotateBlockClockwiseIfPossible();
       e.preventDefault();
     } else if(e.keyCode == 39) {
-      board.moveBlockToRight();
+      board.moveBlockToRightIfPossible();
       e.preventDefault();
     } else if(e.keyCode == 40) {
-      board.rotateBlockCounterclockwise();
+      board.rotateBlockCounterclockwiseIfPossible();
       e.preventDefault();
     }
   }

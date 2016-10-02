@@ -12,7 +12,6 @@ class Board {
   }
 
   start() {
-    this.generateNewBlock();
     this.update();
   }
 
@@ -46,14 +45,17 @@ class Board {
   }
 
   update() {
-    if(!this.fallBlock()) {
-      this.putBlock();
-      this.deleteLine();
+    if(this.fallingBlock == null) {
       this.generateNewBlock();
-      if(!this.canMove()) {
-        console.log("ゲームオーバー");
+      if(this.ifOverwrapBlocks()) {
+        console.log("ゲームオーバ");
         return;
       }
+    } else if(!this.canFallBlock()) {
+      this.putBlock();
+      this.deleteLines();
+    } else {
+      this.fallBlock();
     }
     setTimeout(() => { this.update() }, 150);
   }
@@ -69,16 +71,11 @@ class Board {
         }
       }
     }
+    this.fallingBlock = null;
   }
 
   fallBlock() {
-    if(this.canFallBlock()) {
-      this.fallingBlockPos[0] += 1;
-      this.deleteLine();
-      return true;
-    } else {
-      return false;
-    }
+    this.fallingBlockPos[0] += 1;
   }
 
   canFallBlock() {
@@ -95,11 +92,11 @@ class Board {
     return true;
   }
 
-  deleteLine() {
+  deleteLines() {
     let flag = true;
     for(let i = 0; i < this.status.length; ++i) {
       flag = true;
-      for(var j = 0; j < this.status[i].length; ++j) {
+      for(let j = 0; j < this.status[i].length; ++j) {
         if(this.status[i][j] ==  " ") {
           flag = false;
           break;
@@ -112,52 +109,52 @@ class Board {
     }
   }
 
-  canMove() {
+  ifOverwrapBlocks() {
     let block = this.fallingBlock.getPlacement();
     for(let i = 0; i < block.length; ++i) {
       for(let j = 0; j < block[i].length; ++j) {
-        var pos = this.fallingBlockPos;
-        var y = pos[0] + i, x = pos[1] + j;
+        let pos = this.fallingBlockPos;
+        let y = pos[0] + i, x = pos[1] + j;
 
         if(block[i][j] != " " && this.status[y][x] != " ") {
-          return false;
+          return true;
         }
       }
     }
-    return true;
+    return false;
   }
 
-  rotateBlockClockwise() {
+  rotateBlockClockwiseIfPossible() {
     if(this.fallingBlock.getHeight() <= 10 - this.fallingBlockPos[1]) {
       this.fallingBlock.rotateClockwise();
-      if(!this.canMove()) {
+      if(this.ifOverwrapBlocks()) {
         this.fallingBlock.rotateCounterclockwise();
       }
     }
   }
 
-  rotateBlockCounterclockwise() {
+  rotateBlockCounterclockwiseIfPossible() {
     if(this.fallingBlock.getHeight() <= 10 - this.fallingBlockPos[1]) {
       this.fallingBlock.rotateCounterclockwise();
-      if(!this.canMove()) {
+      if(this.ifOverwrapBlocks()) {
         this.fallingBlock.rotateClockwise();
       }
     }
   }
 
-  moveBlockToRight() {
+  moveBlockToRightIfPossible() {
     if(this.fallingBlockPos[1] < 10 - this.fallingBlock.getWidth()) {
       this.fallingBlockPos[1] += 1;
-      if(!this.canMove()) {
+      if(this.ifOverwrapBlocks()) {
         this.fallingBlockPos[1] -= 1;
       }
     }
   }
 
-  moveBlockToLeft() {
+  moveBlockToLeftIfPossible() {
     if(this.fallingBlockPos[1] > 0) {
       this.fallingBlockPos[1] -= 1;
-      if(!this.canMove()) {
+      if(this.ifOverwrapBlocks()) {
         this.fallingBlockPos[1] += 1;
       }
     }
@@ -166,7 +163,7 @@ class Board {
   toString() {
     let statusChain = [];
     let margin = this.fallingBlockPos[0] * 10;
-    let tmp = this.fallingBlock.toString(this.fallingBlockPos[1], 10);
+    let tmp = (this.fallingBlock != null) ? this.fallingBlock.toString(this.fallingBlockPos[1], 10) : "";
 
     for(let i = 0; i < this.status.length; ++i) {
       for(let j = 0; j < this.status[i].length; ++j) {

@@ -51,11 +51,11 @@ class Board {
         console.log("ゲームオーバ");
         return;
       }
-    } else if(!this.canFallBlock()) {
+    } else if(this.canFallBlock()) {
+      this.fallBlock();
+    } else {
       this.putBlock();
       this.deleteLines();
-    } else {
-      this.fallBlock();
     }
     setTimeout(() => { this.update() }, 150);
   }
@@ -79,17 +79,14 @@ class Board {
   }
 
   canFallBlock() {
-    let floors = this.fallingBlock.getFloors();
-
-    for(let i = 0; i < floors.length; ++i) {
-      let nextFloorY = this.fallingBlockPos[0] + floors[i][0] + 1;
-      let nextFloorX = this.fallingBlockPos[1] + floors[i][1];
-
-      if(this.status[nextFloorY] == undefined || this.status[nextFloorY][nextFloorX] != " ") {
-        return false;
-      }
+    this.fallBlock();
+    if(this.ifOverwrapBlocks()) {
+      this.fallingBlockPos[0] -= 1;
+      return false;
+    } else {
+      this.fallingBlockPos[0] -= 1;
+      return true;
     }
-    return true;
   }
 
   deleteLines() {
@@ -116,7 +113,7 @@ class Board {
         let pos = this.fallingBlockPos;
         let y = pos[0] + i, x = pos[1] + j;
 
-        if(block[i][j] != " " && this.status[y][x] != " ") {
+        if(y > 20 || (block[i][j] != " " && this.status[y][x] != " ")) {
           return true;
         }
       }
